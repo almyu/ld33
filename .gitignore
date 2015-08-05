@@ -1,0 +1,10 @@
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild/
+[Oo]bj/
+[Aa]ssets/UnityVS*
+[Aa]ssembly-*
+*.sln
+*.suo
+*.userprefs
+*.csproj
