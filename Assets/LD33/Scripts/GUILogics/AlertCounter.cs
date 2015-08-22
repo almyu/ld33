@@ -14,7 +14,7 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
         var newValue = _slider.value + valueToAdd;
 
         if (newValue >= Balance.instance.AlarmLevelFlashight && newValue < Balance.instance.AlarmLevelDoorLight) {
-            FlashlightController.instance.Enable();
+            FlashlightController.instance.enabled = true;
         }
 
         if (newValue >= Balance.instance.AlarmLevelDoorLight && newValue < Balance.instance.AlarmLevelTopLight) {
