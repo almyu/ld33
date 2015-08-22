@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Events;
 
 public class TimeCounter : MonoBehaviour {
-
     public float TimeLeft;
+    public UnityEvent TimeOver;
     private Text _timerControl;
 	// Use this for initialization
 	void Start () {
@@ -15,9 +16,18 @@ public class TimeCounter : MonoBehaviour {
 	void Update () {
         TimeLeft -= Time.deltaTime;
 
-        var minutes = TimeLeft / 60;
-        var seconds = TimeLeft % 60;
+        var minutes = Mathf.Floor(TimeLeft / 60).ToString("00");
+        var seconds = (TimeLeft % 60).ToString("00"); ;
 
-        _timerControl.text = String.Format("{0:00}:{1:00}", minutes, seconds);
+        if(seconds == "60")
+        {
+            return;
+        }
+        _timerControl.text = String.Format("{0}:{1}", minutes, seconds);
+
+        if(TimeLeft <= 0)
+        {
+            TimeOver.Invoke();
+        }
     }
 }
