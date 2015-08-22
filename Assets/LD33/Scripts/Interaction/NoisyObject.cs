@@ -4,6 +4,7 @@ using JamSuite.Audio;
 public class NoisyObject : MonoBehaviour {
 
     public string sfx;
+    public int score = 99;
     public float alert = 1f;
     public float minCollisionSpeed = 1f;
     public LayerMask collisionLayers = 1; // default
@@ -17,6 +18,7 @@ public class NoisyObject : MonoBehaviour {
 
             Sfx.Play(sfx);
             AlertCounter.instance.Add(alert);
+            ScoreCounter.instance.Add(score);
         }
     }
 }
