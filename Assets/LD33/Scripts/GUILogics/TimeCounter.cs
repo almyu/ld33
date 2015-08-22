@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
-public class TimeCounter : MonoBehaviour {
+public class TimeCounter : MonoSingleton<TimeCounter> {
     public float TimeLeft;
     public UnityEvent TimeOver;
     private Text _timerControl;

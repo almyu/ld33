@@ -12,18 +12,23 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
 
     public void Add(float valueToAdd) {
         var newValue = _slider.value + valueToAdd;
-        if (newValue >= _slider.maxValue) {
-            _slider.value = _slider.maxValue;
 
-            if(AlertFired == null) {
-                Debug.LogWarning("AlertFired event is null!");
-                return;
-            }
-            AlertFired.Invoke();
+        if (newValue >= Balance.instance.AlarmLevelFlashight && newValue < Balance.instance.AlarmLevelDoorLight) {
+            FlashlightController.instance.Enable();
+        }
 
-            return;
+        if (newValue >= Balance.instance.AlarmLevelDoorLight && newValue < Balance.instance.AlarmLevelTopLight) {
+            //TODO: Open door
         }
         
+        if (newValue >= Balance.instance.AlarmLevelTopLight) {
+            //TODO: Turn on the light
+        }
+
+        if (AlertFired != null) {
+            AlertFired.Invoke();
+        }
+           
         _slider.value = newValue;
     }
 	

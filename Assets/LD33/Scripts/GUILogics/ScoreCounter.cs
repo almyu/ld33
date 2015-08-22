@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreCounter : MonoBehaviour {
+public class ScoreCounter : MonoSingleton<ScoreCounter> {
     private int _currentScore;
     private Text _scoreControl;
 
