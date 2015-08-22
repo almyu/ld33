@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 
     public float speed = 3f;
     public float jumpSpeed = 5f;
+    public float extraJumpTime = 0.1f;
     public LayerMask groundLayers = 1;
     public float groundThreshold = 0.1f;
     public Vector2 mouseSens = Vector2.one;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour {
     private bool grounded = false;
     private float groundDistance;
     private Vector3 jumpVelocity;
+    private float jumpTimer;
 
     private Rigidbody body;
 
@@ -35,7 +37,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void HandleMovement() {
-        var input = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        var input = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
 
         if (input.sqrMagnitude > 1f)
             input.Normalize();
@@ -60,6 +62,9 @@ public class PlayerController : MonoBehaviour {
             grounded = false;
             groundDistance = 0f;
         }
+
+        if (grounded) jumpTimer = extraJumpTime;
+        else jumpTimer -= Time.deltaTime;
     }
 
     private void ApplyGravity() {
@@ -76,7 +81,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void HandleJumping() {
-        if (!grounded) return;
+        if (!grounded && jumpTimer < 0f) return;
         if (!Input.GetButtonDown("Jump")) return;
 
         if (body.isKinematic) jumpVelocity = Vector3.up * jumpSpeed;
@@ -92,7 +97,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void UpdateAnimator() {
-        animator.SetFloat("Forward", body.velocity.WithY(0f).magnitude);
+        animator.SetFloat("Forward", body.velocity.WithY(0f).magnitude, 0.1f, Time.deltaTime);
+        animator.SetFloat("Jump", grounded ? 0f : 1f, 0.1f, Time.deltaTime);
+        animator.SetBool("OnGround", grounded);
     }
 
     private void UpdateInner() {
