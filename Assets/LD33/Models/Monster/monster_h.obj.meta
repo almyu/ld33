@@ -7,11 +7,21 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: Volume4
+    100004: Volume4_MeshPart0
+    100006: Volume4_MeshPart1
     400000: //RootNode
     400002: Volume4
+    400004: Volume4_MeshPart0
+    400006: Volume4_MeshPart1
     2300000: Volume4
+    2300002: Volume4_MeshPart0
+    2300004: Volume4_MeshPart1
     3300000: Volume4
+    3300002: Volume4_MeshPart0
+    3300004: Volume4_MeshPart1
     4300000: Volume4
+    4300002: Volume4_MeshPart0
+    4300004: Volume4_MeshPart1
   materials:
     importMaterials: 1
     materialName: 0
