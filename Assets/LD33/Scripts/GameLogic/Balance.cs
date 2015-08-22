@@ -6,4 +6,6 @@ public class Balance : MonoSingleton<Balance> {
     public int AlarmLevelDoorLight;
     public int AlarmLevelFlashight;
     public float FlashightDuration;
+    public float SpottedPlayerAlarmFactor;
+    public float DoorOpenedDuration;
 }

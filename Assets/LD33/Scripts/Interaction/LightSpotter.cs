@@ -6,6 +6,8 @@ public class LightSpotter : MonoBehaviour {
 
     private GameObject _player;
     private float _fieldOfViewAngle;
+    private float _alertToAdd = 0.0f;
+
     private void Awake() {
         _player = GameObject.FindGameObjectWithTag("Player");
         _fieldOfViewAngle = GetComponent<Light>().spotAngle;
@@ -19,14 +21,19 @@ public class LightSpotter : MonoBehaviour {
             //Debug.DrawRay(transform.position, direction.normalized, Color.red, 10.0f);
             if (Physics.Raycast(transform.position, direction.normalized, out hit, Mathf.Infinity)) {
                 if (hit.collider.gameObject.tag == "Player") {
-                    //Debug.Log("PlayerSpotted!!!");
-                    if (OnPlayerSpotted == null) {
-                        Debug.Log("OnPlayerSpotted is null");
-                        return;
+
+                    _alertToAdd += Time.deltaTime* Balance.instance.SpottedPlayerAlarmFactor;
+                    AlertCounter.instance.Add(_alertToAdd);
+
+                    if (OnPlayerSpotted != null) {
+                        OnPlayerSpotted.Invoke();
                     }
-                    OnPlayerSpotted.Invoke();
                 }
             }
         }
+    }
+
+    private void OnEnable() {
+        _alertToAdd = 0.0f;
     }
 }

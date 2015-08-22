@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 public class FlashlightController : MonoSingleton<FlashlightController> {
-    private bool _enabled = false;
     private Light _flashlight;
     private float elapsed = 0.0f;
     private float strength = 0.5f;
@@ -17,11 +16,8 @@ public class FlashlightController : MonoSingleton<FlashlightController> {
     }
 
     private void Update() {
-        if (!_enabled)
-            return;
-
         if(elapsed >= Balance.instance.FlashightDuration) {
-            Disable();
+            enabled = false;
             return;
         }
         
@@ -31,16 +27,14 @@ public class FlashlightController : MonoSingleton<FlashlightController> {
 
         elapsed += Time.deltaTime;
     }
-        
-    public void Enable() {
+
+    private void OnEnable() {
         _lightSpotter.enabled = true;
         _flashlight.enabled = true;
-        elapsed = 0;
-        _enabled = true;
+        elapsed = 0.0f;
     }
 
-    private void Disable() {
-        _enabled = false;
+    private void OnDisable() {
         _lightSpotter.enabled = false;
         _flashlight.enabled = false;
     }

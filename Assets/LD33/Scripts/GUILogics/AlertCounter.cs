@@ -18,7 +18,7 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
         }
 
         if (newValue >= Balance.instance.AlarmLevelDoorLight && newValue < Balance.instance.AlarmLevelTopLight) {
-            //TODO: Open door
+            DoorController.instance.enabled = true;
         }
         
         if (newValue >= Balance.instance.AlarmLevelTopLight) {
