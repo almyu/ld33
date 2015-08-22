@@ -16,7 +16,7 @@ public class NoisyObject : MonoBehaviour {
             if ((contact.otherCollider.gameObject.layer & collisionLayers.value) == 0) continue;
 
             Sfx.Play(sfx);
-            //AlertCounter.instance.Add(alert);
+            AlertCounter.instance.Add(alert);
         }
     }
 }
