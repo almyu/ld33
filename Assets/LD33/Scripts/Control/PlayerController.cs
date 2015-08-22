@@ -89,8 +89,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void HandleTurning() {
-        var yaw = Input.GetAxis("Mouse X");
-        var pitch = Input.GetAxis("Mouse Y");
+        var yaw = Input.GetAxis("Mouse X") + Input.GetAxis("RightHorizontal");
+        var pitch = Input.GetAxis("Mouse Y") + Input.GetAxis("RightVertical");
 
         transform.Rotate(Vector3.up, yaw * mouseSens.x);
         pitcher.Rotate(Vector3.right, pitch * mouseSens.y, Space.Self);
