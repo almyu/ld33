@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
 
-public class Balance : MonoBehaviour {
-    public int AlarmDecreasingMultiplier;
+public class Balance : MonoSingleton<Balance> {
+    public int AlarmDecreasingFactor;
 }

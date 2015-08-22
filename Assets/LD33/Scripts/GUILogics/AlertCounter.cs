@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class AlertCounter : MonoBehaviour {
+public class AlertCounter : MonoSingleton<AlertCounter> {
     private Slider _slider;
     private Balance _balance;
     // Use this for initialization
-    void Start () {
+    private void Start () {
         _slider = GetComponent<Slider>();
-        _balance = MonoSingleton<Balance>.instance;
+        _balance = Balance.instance;
     }
 
     public void Add(float valueToAdd)
@@ -25,10 +25,10 @@ public class AlertCounter : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+    private void Update () {
         AlarmTester();
 
-        _slider.value -= (Time.deltaTime * _balance.AlarmDecreasingMultiplier);
+        _slider.value -= (Time.deltaTime * _balance.AlarmDecreasingFactor);
     }
 
     private void AlarmTester()
