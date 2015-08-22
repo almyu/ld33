@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class AlertCounter : MonoSingleton<AlertCounter> {
     private Slider _slider;
-
+    public UnityEvent AlertFired;
     // Use this for initialization
     private void Start () {
         _slider = GetComponent<Slider>();
@@ -13,8 +14,13 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
         var newValue = _slider.value + valueToAdd;
         if (newValue >= _slider.maxValue) {
             _slider.value = _slider.maxValue;
-            //TODO: alarm!!!
-            Debug.Log("ALARM!!!");
+
+            if(AlertFired == null) {
+                Debug.LogWarning("AlertFired event is null!");
+                return;
+            }
+            AlertFired.Invoke();
+
             return;
         }
         

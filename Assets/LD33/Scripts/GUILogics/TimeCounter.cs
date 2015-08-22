@@ -25,6 +25,11 @@ public class TimeCounter : MonoBehaviour {
         _timerControl.text = String.Format("Time left: {0}:{1}", minutes, seconds);
 
         if(TimeLeft <= 0) {
+            if (TimeOver == null) {
+                Debug.LogWarning("TimeOver event is null!");
+                return;
+            }
+
             TimeOver.Invoke();
         }
     }
