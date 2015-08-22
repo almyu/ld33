@@ -16,8 +16,8 @@ public class ScoreCounter : MonoSingleton<ScoreCounter> {
         _scoreControl.text = String.Format("Score: {0:0000000}", _currentScore);
     }
 
-    public int GetScore() {
-        return _currentScore;
+    public string GetScore() {
+        return _currentScore.ToString("0000000");
     }
 
     private void Update() {

@@ -25,6 +25,10 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
             //TODO: Turn on the light
         }
 
+        if (newValue >= _slider.maxValue) {
+            GameOverController.instance.ShowGameOver(win: false);
+        }
+
         if (AlertFired != null) {
             AlertFired.Invoke();
         }

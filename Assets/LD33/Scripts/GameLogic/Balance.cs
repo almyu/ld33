@@ -8,4 +8,5 @@ public class Balance : MonoSingleton<Balance> {
     public float FlashightDuration;
     public float SpottedPlayerAlarmFactor;
     public float DoorOpenedDuration;
+    public float LevelDuration;
 }

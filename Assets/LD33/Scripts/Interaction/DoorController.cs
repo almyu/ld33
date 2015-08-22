@@ -48,6 +48,5 @@ public class DoorController : MonoSingleton<DoorController> {
         _lightSpotter.enabled = false;
         _hallLight.enabled = false;
         _elapsed = 0.0f;
-        Door.transform.rotation = _doorClosedState;
     }
 }
