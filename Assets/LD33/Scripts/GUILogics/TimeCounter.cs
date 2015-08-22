@@ -19,14 +19,12 @@ public class TimeCounter : MonoBehaviour {
         var minutes = Mathf.Floor(TimeLeft / 60).ToString("00");
         var seconds = (TimeLeft % 60).ToString("00"); ;
 
-        if(seconds == "60")
-        {
+        if(seconds == "60") {
             return;
         }
         _timerControl.text = String.Format("{0}:{1}", minutes, seconds);
 
-        if(TimeLeft <= 0)
-        {
+        if(TimeLeft <= 0) {
             TimeOver.Invoke();
         }
     }
