@@ -33,9 +33,10 @@ public class FlashlightController : MonoSingleton<FlashlightController> {
     }
         
     public void Enable() {
-        _enabled = true;
         _lightSpotter.enabled = true;
         _flashlight.enabled = true;
+        elapsed = 0;
+        _enabled = true;
     }
 
     private void Disable() {
