@@ -22,7 +22,7 @@ public class TimeCounter : MonoBehaviour {
         if(seconds == "60") {
             return;
         }
-        _timerControl.text = String.Format("{0}:{1}", minutes, seconds);
+        _timerControl.text = String.Format("Time left: {0}:{1}", minutes, seconds);
 
         if(TimeLeft <= 0) {
             TimeOver.Invoke();
