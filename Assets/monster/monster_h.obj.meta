@@ -1,52 +1,32 @@
 fileFormatVersion: 2
-guid: bad1565cf39c9ff4e8082862cd134b0d
-timeCreated: 1440236167
+guid: f98f25e440675e749a3c46c121f7d19b
+timeCreated: 1440244504
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Volume4
-    100004: Volume4_MeshPart0
-    100006: Volume4_MeshPart1
-    100008: Volume12
-    100010: Volume4_copy001
-    100012: Volume4_copy002
-    100014: Volume4_copy004
-    100016: Volume4_copy005
+    100002: Volume12
+    100004: Volume4_copy001
+    100006: Volume4_copy002
+    100008: Volume4_copy005
     400000: //RootNode
-    400002: Volume4
-    400004: Volume4_MeshPart0
-    400006: Volume4_MeshPart1
-    400008: Volume12
-    400010: Volume4_copy001
-    400012: Volume4_copy002
-    400014: Volume4_copy004
-    400016: Volume4_copy005
-    2300000: Volume4
-    2300002: Volume4_MeshPart0
-    2300004: Volume4_MeshPart1
-    2300006: Volume12
-    2300008: Volume4_copy001
-    2300010: Volume4_copy002
-    2300012: Volume4_copy004
-    2300014: Volume4_copy005
-    3300000: Volume4
-    3300002: Volume4_MeshPart0
-    3300004: Volume4_MeshPart1
-    3300006: Volume12
-    3300008: Volume4_copy001
-    3300010: Volume4_copy002
-    3300012: Volume4_copy004
-    3300014: Volume4_copy005
-    4300000: Volume4
-    4300002: Volume4_MeshPart0
-    4300004: Volume4_MeshPart1
-    4300006: Volume12
-    4300008: Volume4_copy001
-    4300010: Volume4_copy002
-    4300012: Volume4_copy004
-    4300014: Volume4_copy005
+    400002: Volume12
+    400004: Volume4_copy001
+    400006: Volume4_copy002
+    400008: Volume4_copy005
+    2300000: Volume12
+    2300002: Volume4_copy001
+    2300004: Volume4_copy002
+    2300006: Volume4_copy005
+    3300000: Volume12
+    3300002: Volume4_copy001
+    3300004: Volume4_copy002
+    3300006: Volume4_copy005
+    4300000: Volume12
+    4300002: Volume4_copy001
+    4300004: Volume4_copy002
+    4300006: Volume4_copy005
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,7 +50,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .000500000024
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
