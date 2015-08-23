@@ -13,9 +13,7 @@ public class ScreamOnFall : MonoBehaviour {
             return;
         }
         
-        foreach (var contact in collision.contacts) {
-            Sfx.Play(sfx);
-            AlertCounter.instance.Add(alert);
-        }
+        Sfx.Play(sfx);
+        AlertCounter.instance.Add(alert);
     }
 }
