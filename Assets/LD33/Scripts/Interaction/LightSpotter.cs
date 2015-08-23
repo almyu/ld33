@@ -27,15 +27,19 @@ public class LightSpotter : MonoBehaviour {
             if (Physics.Raycast(transform.position, direction.normalized, out hit, Mathf.Infinity)) {
                 if (hit.collider.gameObject.tag == "Player") {
                     iSeePlayer = true;
-                    _alertToAdd += Time.deltaTime* Balance.instance.SpottedPlayerAlarmFactor;
+                    _alertToAdd += Time.deltaTime * Balance.instance.SpottedPlayerAlarmFactor;
                     AlertCounter.instance.Add(_alertToAdd);
-                    
+
                     OnPlayerSpotted.Invoke();
                 }
             }
+            else {
+                if (iSeePlayer) {
+                    iSeePlayer = false;
+                    OnPlayerLost.Invoke();
+                }
+            }
 
-            iSeePlayer = false;
-            OnPlayerLost.Invoke();
         }
     }
 
