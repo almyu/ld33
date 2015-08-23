@@ -8,7 +8,6 @@ public class ScreamOnFall : MonoBehaviour {
     public float minCollisionSpeed = 1f;
 
     private void OnCollisionEnter(Collision collision) {
-        Debug.Log(Mathf.Abs(collision.relativeVelocity.y));
         if (Mathf.Abs(collision.relativeVelocity.y) < minCollisionSpeed) {
             return;
         }
