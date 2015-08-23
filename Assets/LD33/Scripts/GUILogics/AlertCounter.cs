@@ -21,17 +21,14 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
         if (newValue >= _slider.maxValue) {
             GameOverController.instance.ShowGameOver(win: false);
             _gameOver = true;
+            enabled = false;
             return;
         }
 
         if (_timeElapsedBetweenAlarmFires <= Balance.instance.TimeBetweenAlarms) {
             return;
         }
-
-        if (newValue < Balance.instance.AlarmLevelFlashight) {
-            FlashlightController.instance.FollowPlayer(false);
-        }
-
+        
         if (newValue >= Balance.instance.AlarmLevelFlashight && newValue < Balance.instance.AlarmLevelDoorLight) {
             FlashlightController.instance.FollowPlayer(true);
             _timeElapsedBetweenAlarmFires = 0.0f;
@@ -58,6 +55,10 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
             return;
 
         _slider.value -= (Time.deltaTime * Balance.instance.AlarmDecreasingFactor);
+
+        if (_slider.value < Balance.instance.AlarmLevelFlashight) {
+            FlashlightController.instance.FollowPlayer(false);
+        }
 
         _timeElapsedBetweenAlarmFires += Time.deltaTime;
 

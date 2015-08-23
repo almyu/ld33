@@ -5,6 +5,7 @@ public class GameOverController : MonoSingleton<GameOverController> {
     private GameObject _gameOverText;
     private GameObject _restartButton;
     private Text _restartText;
+    private bool _gameOver = false;
     private void Awake() {
         _gameOverText = GameObject.FindGameObjectWithTag("GameOverText");
         _restartButton = GameObject.FindGameObjectWithTag("RestartButton");
@@ -12,6 +13,10 @@ public class GameOverController : MonoSingleton<GameOverController> {
     }
 
     public void ShowGameOver(bool win) {
+        if (_gameOver)
+            return;
+        _gameOver = true;
+
         _restartButton.GetComponent<Image>().enabled = true;
         _restartButton.GetComponent<Button>().enabled = true;
         _restartText.enabled = true;
