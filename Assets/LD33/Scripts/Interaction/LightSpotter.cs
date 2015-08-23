@@ -33,15 +33,13 @@ public class LightSpotter : MonoBehaviour {
 
                     _alertToAdd += Time.deltaTime * Balance.instance.SpottedPlayerAlarmFactor;
                     AlertCounter.instance.Add(_alertToAdd);
+                    return;
                 }
             }
-            else {
-                if (iSeePlayer) {
-                    iSeePlayer = false;
-                    OnPlayerLost.Invoke();
-                }
-            }
-
+        }
+        if (iSeePlayer) {
+            iSeePlayer = false;
+            OnPlayerLost.Invoke();
         }
     }
 
