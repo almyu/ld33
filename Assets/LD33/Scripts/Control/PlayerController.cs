@@ -12,14 +12,15 @@ public class PlayerController : MonoBehaviour {
     public float jumpSpeed = 5f;
     public float extraJumpTime = 0.1f;
     public float airSpeedFactor = 1f;
+    public AnimationCurve airSpeedFalloff = AnimationCurve.Linear(0f, 1f, 1f, 1f);
     public float jumpKickFactor = 1f;
     public AnimationCurve jumpKickFalloff = AnimationCurve.Linear(0f, 1f, 1f, 0f);
     public LayerMask groundLayers = 1;
     public float groundThreshold = 0.1f;
     public Vector2 mouseSens = Vector2.one;
 
-    private bool grounded = false;
-    private float jumpTimer;
+    private bool grounded;
+    private float airTime, nextJumpTimer;
     private Vector3 jumpKick;
 
     private Rigidbody body;
@@ -31,9 +32,9 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         CheckGround();
+        HandleTurning();
         HandleMovement();
         HandleJumping();
-        HandleTurning();
         UpdateAnimator();
         UpdateModel();
     }
@@ -47,8 +48,8 @@ public class PlayerController : MonoBehaviour {
         var move = turner.TransformDirection(input) * speed;
 
         if (!grounded) {
-            move *= airSpeedFactor;
-            move += jumpKick * jumpKickFalloff.Evaluate(-jumpTimer);
+            move *= airSpeedFactor * airSpeedFalloff.Evaluate(airTime);
+            move += jumpKick * jumpKickFalloff.Evaluate(airTime);
         }
 
         body.velocity = move.WithY(body.velocity.y);
@@ -60,15 +61,19 @@ public class PlayerController : MonoBehaviour {
         RaycastHit hit;
         grounded = Physics.Raycast(ray, out hit, groundLayers.value) && hit.distance <= groundThreshold * 2f;
 
-        if (grounded) jumpTimer = extraJumpTime;
-        else jumpTimer -= Time.deltaTime;
+        if (grounded) airTime = 0f;
+        else airTime += Time.deltaTime;
     }
 
     private void HandleJumping() {
-        if (!grounded && jumpTimer < 0f) return;
+        nextJumpTimer -= Time.deltaTime;
+
+        if (!grounded) return;
+        if (airTime > extraJumpTime || nextJumpTimer > 0f) return;
         if (!Input.GetButtonDown("Jump")) return;
 
         jumpKick = body.velocity.WithY(0f) * jumpKickFactor;
+        nextJumpTimer = extraJumpTime;
 
         body.velocity += Vector3.up * jumpSpeed + jumpKick;
     }
