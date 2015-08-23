@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     public Transform pitcher;
     public Animator animator;
 
+    public float animationSpeed = 3f;
     public float speed = 3f;
     public float jumpSpeed = 5f;
     public float extraJumpTime = 0.1f;
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void UpdateAnimator() {
-        animator.SetFloat("Forward", body.velocity.WithY(0f).magnitude, 0.1f, Time.deltaTime);
+        animator.SetFloat("Forward", body.velocity.WithY(0f).magnitude * animationSpeed, 0.1f, Time.deltaTime);
         animator.SetFloat("Jump", grounded ? 0f : 1f, 0.1f, Time.deltaTime);
         animator.SetBool("OnGround", grounded);
     }
