@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour {
     public Vector2 mouseSens = Vector2.one;
 
     private bool grounded = false;
-    private float groundDistance;
-    private Vector3 jumpVelocity;
     private float jumpTimer;
 
     private Rigidbody body;
@@ -28,7 +26,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         CheckGround();
-        ApplyGravity();
         HandleMovement();
         HandleJumping();
         HandleTurning();
@@ -44,48 +41,24 @@ public class PlayerController : MonoBehaviour {
 
         var move = transform.TransformDirection(input) * speed;
 
-        if (body.isKinematic)
-            transform.position += move * Time.deltaTime;
-        else
-            body.velocity = move.WithY(body.velocity.y);
+        body.velocity = move.WithY(body.velocity.y);
     }
 
     private void CheckGround() {
         var ray = new Ray(transform.position + Vector3.up * groundThreshold, Vector3.down);
 
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, groundLayers)) {
-            groundDistance = hit.distance - groundThreshold;
-            grounded = groundDistance <= groundThreshold;
-        }
-        else {
-            grounded = false;
-            groundDistance = 0f;
-        }
+        grounded = Physics.Raycast(ray, out hit, groundLayers.value) && hit.distance <= groundThreshold * 2f;
 
         if (grounded) jumpTimer = extraJumpTime;
         else jumpTimer -= Time.deltaTime;
-    }
-
-    private void ApplyGravity() {
-        if (!body.isKinematic) return;
-
-        var deltaVelocity = Physics.gravity * Time.deltaTime;
-        var deltaPosition = jumpVelocity + deltaVelocity * 0.5f;
-
-        if (deltaPosition.y < 0f && deltaPosition.y < -groundDistance)
-            deltaPosition.y = -groundDistance;
-
-        jumpVelocity += deltaVelocity;
-        transform.position += deltaPosition;
     }
 
     private void HandleJumping() {
         if (!grounded && jumpTimer < 0f) return;
         if (!Input.GetButtonDown("Jump")) return;
 
-        if (body.isKinematic) jumpVelocity = Vector3.up * jumpSpeed;
-        else body.velocity += Vector3.up * jumpSpeed;
+        body.velocity += Vector3.up * jumpSpeed;
     }
 
     private void HandleTurning() {

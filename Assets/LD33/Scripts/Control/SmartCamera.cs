@@ -10,7 +10,7 @@ public class SmartCamera : MonoBehaviour {
         initialZ = transform.localPosition.z;
     }
 
-    private void Update() {
+    private void LateUpdate() {
         RaycastHit hit;
         if (Physics.Raycast(transform.parent.position, -transform.forward, out hit, -initialZ, ~ignoredLayers.value))
             transform.localPosition = Vector3.back * hit.distance;
