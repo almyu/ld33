@@ -1,0 +1,251 @@
+fileFormatVersion: 2
+guid: 227d8d4bcb6b3ca489f42302578627ac
+timeCreated: 1440323979
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: pCube2
+    100004: pCube3
+    100006: pCylinder1
+    100008: pCylinder2
+    100010: pCylinder3
+    100012: polySurface1
+    100014: polySurface2
+    100016: transform1
+    100018: transform2
+    100020: hand_left
+    100022: hand_right
+    100024: head
+    100026: leg_left
+    100028: leg_left1
+    400000: //RootNode
+    400002: pCube2
+    400004: pCube3
+    400006: pCylinder1
+    400008: pCylinder2
+    400010: pCylinder3
+    400012: polySurface1
+    400014: polySurface2
+    400016: transform1
+    400018: transform2
+    400020: hand_left
+    400022: hand_right
+    400024: head
+    400026: leg_left
+    400028: leg_left1
+    2300000: pCube2
+    2300002: pCube3
+    2300004: pCylinder3
+    2300006: polySurface1
+    2300008: polySurface2
+    2300010: //RootNode
+    2300012: hand_left
+    2300014: hand_right
+    2300016: head
+    2300018: leg_left
+    2300020: leg_left1
+    3300000: pCube2
+    3300002: pCube3
+    3300004: pCylinder3
+    3300006: polySurface1
+    3300008: polySurface2
+    3300010: //RootNode
+    3300012: hand_left
+    3300014: hand_right
+    3300016: head
+    3300018: leg_left
+    3300020: leg_left1
+    4300000: pCube2
+    4300002: polySurface1
+    4300004: polySurface2
+    4300006: pCylinder3
+    4300008: pCube3
+    4300010: polySurface7
+    4300012: head
+    4300014: hand_left
+    4300016: hand_right
+    4300018: leg_left
+    4300020: leg_left1
+    7400000: Idle
+    7400002: Walk
+    7400004: Jump
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: <Root Transform>
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 120
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: head
+        weight: 1
+      - path: head/hand_left
+        weight: 1
+      - path: head/hand_right
+        weight: 1
+      - path: leg_left
+        weight: 1
+      - path: leg_left1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 130
+      lastFrame: 160
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: head
+        weight: 1
+      - path: head/hand_left
+        weight: 1
+      - path: head/hand_right
+        weight: 1
+      - path: leg_left
+        weight: 1
+      - path: leg_left1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Jump
+      takeName: Take 001
+      firstFrame: 170
+      lastFrame: 175
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: head
+        weight: 1
+      - path: head/hand_left
+        weight: 1
+      - path: head/hand_right
+        weight: 1
+      - path: leg_left
+        weight: 1
+      - path: leg_left1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .100000001
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: head
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
