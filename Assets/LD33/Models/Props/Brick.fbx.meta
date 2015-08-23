@@ -10,6 +10,8 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cube
+    4300002: Cylinder
+    4300004: Brick
     6400000: //RootNode
   materials:
     importMaterials: 1
