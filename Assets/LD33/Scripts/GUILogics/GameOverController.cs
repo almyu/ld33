@@ -2,19 +2,27 @@
 using UnityEngine.UI;
 
 public class GameOverController : MonoSingleton<GameOverController> {
-    public GameObject gameOverText;
-    public GameObject restartButton;
+    private GameObject _gameOverText;
+    private GameObject _restartButton;
+    private Text _restartText;
+    private void Awake() {
+        _gameOverText = GameObject.FindGameObjectWithTag("GameOverText");
+        _restartButton = GameObject.FindGameObjectWithTag("RestartButton");
+        _restartText = _restartButton.GetComponentInChildren<Text>();
+    }
 
     public void ShowGameOver(bool win) {
-        gameOverText.SetActive(true);
-        restartButton.GetComponent<Button>().onClick.AddListener(Restart);
+        _restartButton.GetComponent<Image>().enabled = true;
+        _restartButton.GetComponent<Button>().enabled = true;
+        _restartText.enabled = true;
+        _restartButton.GetComponent<Button>().onClick.AddListener(Restart);
 
         var text = string.Empty;
         text += win ? "You win!" : "You've lost!";
         text += "\n";
         text += "Your score: " + ScoreCounter.instance.GetScore();
 
-        gameOverText.GetComponent<Text>().text = text;
+        _gameOverText.GetComponent<Text>().text = text;
     }
 
     private void Restart() {
