@@ -9,8 +9,6 @@ public class DoorController : MonoSingleton<DoorController> {
     private Light _hallLight;
     private LightSpotter _lightSpotter;
     private float _elapsed = 0.0f;
-    private float _doorOpenAngle = -60.0f;
-    private float _doorCloseAngle = 60.0f;
     private Animator _animation;
 
     private void Awake() {

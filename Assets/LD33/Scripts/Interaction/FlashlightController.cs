@@ -1,68 +1,74 @@
 ﻿using JamSuite.Audio;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FlashlightController : MonoSingleton<FlashlightController> {
 
     public string sfx;
+    public float patrolToNewTarget;
 
+    private GameObject[] _pointsForPatrol;
     private Light _flashlight;
-    private float elapsed = 0.0f;
     private float strength = 0.5f;
-    private bool _firstTime = true;
+    private float _elapsed = 0.0f;
     private const float SmoothTime = 0.2F;
     private GameObject _player;
     private LightSpotter _lightSpotter;
-    private Vector3 _oldPlayerPosition;
+    private bool _followPlayer = false;
+    private bool _generateNewTarget = true;
+    private Vector3 _target;
 
     private void Awake() {
         _flashlight = GetComponent<Light>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _lightSpotter = GetComponent<LightSpotter>();
+        _pointsForPatrol = GameObject.FindGameObjectsWithTag("PointsForSauron");
+        _target = GenerateNewTarget();
     }
 
     private void Update() {
-        elapsed += Time.deltaTime;
+        _elapsed += Time.deltaTime;
+        if(_elapsed >= patrolToNewTarget) {
+            _generateNewTarget = true;
+            _elapsed = 0.0f;
+        }
 
-        //WaitAndTurnOnFlashLight
-        if (elapsed < Balance.instance.WaitBeforeOpenDoor) {
-            return;
+        if (!_followPlayer) {
+            Patrol();
         }
         else {
-            if (!_lightSpotter.enabled) {
-                _lightSpotter.enabled = true;
-                _flashlight.enabled = true;
-            }
-        }
-
-        if (elapsed >= Balance.instance.FlashightDuration + Balance.instance.WaitBeforeOpenDoor) {
-            enabled = false;
-            return;
-        }
-
-        if (!_firstTime) {
-            FollowPlayer(_player.transform.position);
-        }
-        else {
-            FollowPlayer(_oldPlayerPosition);
-            _firstTime = false;
+            StartFollowPlayer();
         }
     }
     
-    private void FollowPlayer(Vector3 playerPosition) {
-        var targetRotation = Quaternion.LookRotation(playerPosition - transform.position);
+    private void StartFollowPlayer() {
+        var targetRotation = Quaternion.LookRotation(_player.transform.position - transform.position);
         var str = Mathf.Min(strength * Time.deltaTime, 1);
         _flashlight.transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
     }
 
-    private void OnEnable() {
-        _oldPlayerPosition = _player.transform.position;
-        _flashlight.transform.rotation = Quaternion.LookRotation(_oldPlayerPosition);
-        Sfx.Play(sfx);
-        elapsed = 0.0f;
+    private void Patrol() {
+        if (_generateNewTarget) {
+            _target = GenerateNewTarget();
+        }
+
+        var targetRotation = Quaternion.LookRotation(_target - transform.position);
+        var str = Mathf.Min(strength * Time.deltaTime, 1);
+        _flashlight.transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
     }
 
+    private Vector3 GenerateNewTarget() {
+        var r = Random.Range(0, _pointsForPatrol.Length);
+        _generateNewTarget = false;
+        return _pointsForPatrol[r].transform.position;
+    }
+    
     private void OnDisable() {
         _lightSpotter.enabled = false;
         _flashlight.enabled = false;
+    }
+
+    public void FollowPlayer(bool follow) {
+        _followPlayer = follow;
     }
 }
