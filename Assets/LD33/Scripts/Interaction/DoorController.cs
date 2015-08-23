@@ -1,6 +1,10 @@
-﻿using UnityEngine;
+﻿using JamSuite.Audio;
+using UnityEngine;
 
 public class DoorController : MonoSingleton<DoorController> {
+
+    public string sfx;
+
     private GameObject _door;
     private Light _hallLight;
     private LightSpotter _lightSpotter;
@@ -17,14 +21,25 @@ public class DoorController : MonoSingleton<DoorController> {
     private void Update() {
         _elapsed += Time.deltaTime;
 
-        if (_elapsed >= Balance.instance.DoorOpenedDuration) {
+        //WaitAndOpenDoor
+        if (_elapsed < Balance.instance.WaitBeforeOpenDoor) {
+            return;
+        }
+        else {
+            if (!_lightSpotter.enabled) {
+                _lightSpotter.enabled = true;
+                _hallLight.enabled = true;
+            }
+        }
+
+        if (_elapsed >= Balance.instance.DoorOpenedDuration + Balance.instance.WaitBeforeOpenDoor) {
             RotateDoor(_doorCloseAngle);
         }
         else {
             RotateDoor(_doorOpenAngle);
         }
         
-        if (_elapsed >= Balance.instance.DoorOpenedDuration*1.5) {
+        if (_elapsed >= Balance.instance.DoorOpenedDuration*1.5 + Balance.instance.WaitBeforeOpenDoor) {
             enabled = false;
         }
     }
@@ -36,8 +51,8 @@ public class DoorController : MonoSingleton<DoorController> {
     
     private void OnEnable() {
         _elapsed = 0.0f;
-        _lightSpotter.enabled = true;
-        _hallLight.enabled = true;
+        Sfx.Play(sfx);
+
     }
 
     private void OnDisable() {
