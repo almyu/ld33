@@ -1,0 +1,153 @@
+fileFormatVersion: 2
+guid: 2880822db7dfb724aa4a42d2c7fd3867
+timeCreated: 1440351733
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: pCube20
+    100002: polySurface18
+    100004: polySurface19
+    100006: polySurface20
+    100008: polySurface21
+    100010: polySurface22
+    100012: polySurface23
+    100014: polySurface24
+    100016: polySurface25
+    100018: polySurface26
+    100020: polySurface27
+    100022: polySurface28
+    100024: polySurface29
+    100026: polySurface30
+    100028: polySurface31
+    100030: polySurface32
+    100032: polySurface33
+    100034: polySurface7
+    100036: polySurface8
+    100038: robot
+    100040: //RootNode
+    100042: transform37
+    100044: transform44
+    100046: transform45
+    100048: transform46
+    100050: transform47
+    100052: transform48
+    100054: transform49
+    100056: transform50
+    100058: transform51
+    100060: transform52
+    100062: transform53
+    100064: transform54
+    100066: transform55
+    100068: transform56
+    100070: transform57
+    100072: transform58
+    100074: transform59
+    100076: transform60
+    100078: transform61
+    400000: pCube20
+    400002: polySurface18
+    400004: polySurface19
+    400006: polySurface20
+    400008: polySurface21
+    400010: polySurface22
+    400012: polySurface23
+    400014: polySurface24
+    400016: polySurface25
+    400018: polySurface26
+    400020: polySurface27
+    400022: polySurface28
+    400024: polySurface29
+    400026: polySurface30
+    400028: polySurface31
+    400030: polySurface32
+    400032: polySurface33
+    400034: polySurface7
+    400036: polySurface8
+    400038: robot
+    400040: //RootNode
+    400042: transform37
+    400044: transform44
+    400046: transform45
+    400048: transform46
+    400050: transform47
+    400052: transform48
+    400054: transform49
+    400056: transform50
+    400058: transform51
+    400060: transform52
+    400062: transform53
+    400064: transform54
+    400066: transform55
+    400068: transform56
+    400070: transform57
+    400072: transform58
+    400074: transform59
+    400076: transform60
+    400078: transform61
+    2300000: robot
+    3300000: robot
+    4300000: robot
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .100000001
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
