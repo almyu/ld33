@@ -7,11 +7,13 @@ public class Robot : MonoBehaviour {
     public string alarmSfx = "RobotSpotsPlayer";
 
     public void OnPlayerSpotted() {
+        Debug.Log("Hey!");
         SetAnimationSpeed(headAnimation, 0f);
         Sfx.Play(alarmSfx);
     }
 
     public void OnPlayerLost() {
+        Debug.Log("Must be rats");
         SetAnimationSpeed(headAnimation, 1f);
     }
 
