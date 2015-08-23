@@ -11,11 +11,13 @@ public class DoorController : MonoSingleton<DoorController> {
     private float _elapsed = 0.0f;
     private float _doorOpenAngle = -60.0f;
     private float _doorCloseAngle = 60.0f;
+    private Animator _animation;
 
     private void Awake() {
         _door = GameObject.FindGameObjectWithTag("Door");
         _hallLight = GetComponent<Light>();
         _lightSpotter = GetComponent<LightSpotter>();
+        _animation = _door.GetComponent<Animator>();
     }
 
     private void Update() {
@@ -33,26 +35,20 @@ public class DoorController : MonoSingleton<DoorController> {
         }
 
         if (_elapsed >= Balance.instance.DoorOpenedDuration + Balance.instance.WaitBeforeOpenDoor) {
-            RotateDoor(_doorCloseAngle);
+            _animation.Play("DoorClose");
         }
         else {
-            RotateDoor(_doorOpenAngle);
+            _animation.Play("DoorOpen");
         }
         
         if (_elapsed >= Balance.instance.DoorOpenedDuration*1.5 + Balance.instance.WaitBeforeOpenDoor) {
             enabled = false;
         }
     }
-
-    private void RotateDoor(float doorOpenAngle) {
-        var str = Mathf.Min(0.5f * Time.deltaTime, 1);
-        _door.transform.rotation = Quaternion.Lerp(_door.transform.rotation, Quaternion.AngleAxis(doorOpenAngle, Vector3.up), str);
-    }
-    
+        
     private void OnEnable() {
         _elapsed = 0.0f;
         Sfx.Play(sfx);
-
     }
 
     private void OnDisable() {
