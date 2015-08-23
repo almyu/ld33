@@ -3,7 +3,12 @@ using UnityEngine.Events;
 
 public class LightSpotter : MonoBehaviour {
     public UnityEvent OnPlayerSpotted;
+    public UnityEvent OnPlayerLost;
 
+    [HideInInspector]
+    public bool iSeePlayer;
+
+    public Event playerSpotted;
     private GameObject _player;
     private float _fieldOfViewAngle;
     private float _alertToAdd = 0.0f;
@@ -21,15 +26,20 @@ public class LightSpotter : MonoBehaviour {
             //Debug.DrawRay(transform.position, direction.normalized, Color.red, 10.0f);
             if (Physics.Raycast(transform.position, direction.normalized, out hit, Mathf.Infinity)) {
                 if (hit.collider.gameObject.tag == "Player") {
-
-                    _alertToAdd += Time.deltaTime* Balance.instance.SpottedPlayerAlarmFactor;
+                    iSeePlayer = true;
+                    _alertToAdd += Time.deltaTime * Balance.instance.SpottedPlayerAlarmFactor;
                     AlertCounter.instance.Add(_alertToAdd);
 
-                    if (OnPlayerSpotted != null) {
-                        OnPlayerSpotted.Invoke();
-                    }
+                    OnPlayerSpotted.Invoke();
                 }
             }
+            else {
+                if (iSeePlayer) {
+                    iSeePlayer = false;
+                    OnPlayerLost.Invoke();
+                }
+            }
+
         }
     }
 
