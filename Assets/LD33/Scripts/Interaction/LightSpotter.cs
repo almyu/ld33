@@ -12,10 +12,12 @@ public class LightSpotter : MonoBehaviour {
     private GameObject _player;
     private float _fieldOfViewAngle;
     private float _alertToAdd = 0.0f;
+    private Light _light;
 
     private void Awake() {
         _player = GameObject.FindGameObjectWithTag("Player");
-        _fieldOfViewAngle = GetComponent<Light>().spotAngle;
+        _light = GetComponent<Light>();
+        _fieldOfViewAngle = _light.spotAngle;
     }
 
     private void Update() {
@@ -24,7 +26,7 @@ public class LightSpotter : MonoBehaviour {
         if (angle < _fieldOfViewAngle * 0.5f) {
             RaycastHit hit;
             //Debug.DrawRay(transform.position, direction.normalized, Color.red, 10.0f);
-            if (Physics.Raycast(transform.position, direction.normalized, out hit, Mathf.Infinity)) {
+            if (Physics.Raycast(transform.position, direction.normalized, out hit, _light.range)) {
                 if (hit.collider.gameObject.tag == "Player") {
                     if (!iSeePlayer) {
                         iSeePlayer = true;
