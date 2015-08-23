@@ -2,34 +2,19 @@
 
 public class SmartCamera : MonoBehaviour {
 
-    public Vector3 offset;
-    public float maxDistance = 1f;
-    public float rotationDelay = 0.5f;
+    public LayerMask ignoredLayers;
 
-    private Transform player;
-    private Vector3 lastTarget;
-    private float inactivityTimer;
+    private float initialZ;
 
     private void Awake() {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        initialZ = transform.localPosition.z;
     }
 
     private void Update() {
-        var target = player.position + offset;
-
-        if (target != lastTarget)
-            inactivityTimer = rotationDelay;
-        else {
-            inactivityTimer -= Time.deltaTime;
-
-            if (inactivityTimer <= 0f) {
-                transform.rotation = Quaternion.Slerp(transform.rotation, player.rotation, -inactivityTimer);
-                //transform.position = Vector3.Lerp(transform.rotation, )
-            }
-        }
-
-        lastTarget = target;
-
-        transform.position = target + (transform.position - target).normalized * maxDistance;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.parent.position, -transform.forward, out hit, -initialZ, ~ignoredLayers.value))
+            transform.localPosition = Vector3.back * hit.distance;
+        else
+            transform.localPosition = Vector3.forward * initialZ;
     }
 }
