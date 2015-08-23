@@ -3,8 +3,8 @@
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour {
 
-    public Transform inner;
-    public Transform pitcher;
+    public Transform model;
+    public Transform turner, pitcher;
     public Animator animator;
 
     public float animationSpeed = 3f;
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
         HandleJumping();
         HandleTurning();
         UpdateAnimator();
-        UpdateInner();
+        UpdateModel();
     }
 
     private void HandleMovement() {
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
         if (input.sqrMagnitude > 1f)
             input.Normalize();
 
-        var move = transform.TransformDirection(input) * speed;
+        var move = turner.TransformDirection(input) * speed;
 
         body.velocity = move.WithY(body.velocity.y);
     }
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
         var yaw = Input.GetAxis("Mouse X") + Input.GetAxis("RightHorizontal");
         var pitch = Input.GetAxis("Mouse Y") + Input.GetAxis("RightVertical");
 
-        transform.Rotate(Vector3.up, yaw * mouseSens.x);
+        turner.Rotate(Vector3.up, yaw * mouseSens.x);
         pitcher.Rotate(Vector3.right, pitch * mouseSens.y, Space.Self);
     }
 
@@ -76,11 +76,11 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("OnGround", grounded);
     }
 
-    private void UpdateInner() {
+    private void UpdateModel() {
         var planarVelocity = body.velocity.WithY(0f);
         if (planarVelocity.sqrMagnitude < 0.1f) return;
 
         var desiredFacing = Quaternion.LookRotation(planarVelocity);
-        inner.rotation = Quaternion.Slerp(inner.rotation, desiredFacing, Time.deltaTime * 10f);
+        model.rotation = Quaternion.Slerp(model.rotation, desiredFacing, Time.deltaTime * 10f);
     }
 }
