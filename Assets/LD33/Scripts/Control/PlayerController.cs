@@ -11,12 +11,16 @@ public class PlayerController : MonoBehaviour {
     public float speed = 3f;
     public float jumpSpeed = 5f;
     public float extraJumpTime = 0.1f;
+    public float airSpeedFactor = 1f;
+    public float jumpKickFactor = 1f;
+    public AnimationCurve jumpKickFalloff = AnimationCurve.Linear(0f, 1f, 1f, 0f);
     public LayerMask groundLayers = 1;
     public float groundThreshold = 0.1f;
     public Vector2 mouseSens = Vector2.one;
 
     private bool grounded = false;
     private float jumpTimer;
+    private Vector3 jumpKick;
 
     private Rigidbody body;
 
@@ -42,6 +46,11 @@ public class PlayerController : MonoBehaviour {
 
         var move = turner.TransformDirection(input) * speed;
 
+        if (!grounded) {
+            move *= airSpeedFactor;
+            move += jumpKick * jumpKickFalloff.Evaluate(-jumpTimer);
+        }
+
         body.velocity = move.WithY(body.velocity.y);
     }
 
@@ -59,7 +68,9 @@ public class PlayerController : MonoBehaviour {
         if (!grounded && jumpTimer < 0f) return;
         if (!Input.GetButtonDown("Jump")) return;
 
-        body.velocity += Vector3.up * jumpSpeed;
+        jumpKick = body.velocity.WithY(0f) * jumpKickFactor;
+
+        body.velocity += Vector3.up * jumpSpeed + jumpKick;
     }
 
     private void HandleTurning() {
