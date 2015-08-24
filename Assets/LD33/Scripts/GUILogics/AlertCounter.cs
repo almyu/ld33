@@ -17,7 +17,7 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
     private void Awake () {
         _slider = GetComponent<Slider>();
         _timeElapsedBetweenAlarmFires = Balance.instance.TimeBetweenAlarms;
-        _doorOpenerTimer = Balance.instance.DoorOpenerTimer;
+        _doorOpenerTimer = GenerateDoorOpenerTimer();
     }
     
     public void Add(float valueToAdd) {
@@ -47,6 +47,10 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
 
         alertFired.Invoke();
     }
+
+    private float GenerateDoorOpenerTimer() {
+        return Random.Range(Balance.instance.DoorOpenerTimerFrom, Balance.instance.DoorOpenerTimerTo);
+    }
 	
 	// Update is called once per frame
     private void Update () {
@@ -58,7 +62,7 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
         _doorOpenerTimer -= Time.deltaTime;
         if (_doorOpenerTimer <= 0) {
             DoorController.instance.enabled = true;
-            _doorOpenerTimer = Balance.instance.DoorOpenerTimer;
+            _doorOpenerTimer = GenerateDoorOpenerTimer();
         }
 
         _slider.value -= (Time.deltaTime * Balance.instance.AlarmDecreasingFactor);
