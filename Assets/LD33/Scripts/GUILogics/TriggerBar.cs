@@ -7,6 +7,7 @@ public class TriggerBar : MonoSingleton<TriggerBar> {
     public RectTransform template;
 
     public Trigger[] triggers;
+    public Sprite[] _points;
 
     private void Awake() {
         triggers = FindObjectsOfType<Trigger>();
@@ -20,6 +21,7 @@ public class TriggerBar : MonoSingleton<TriggerBar> {
         xf.SetParent(transform, false);
         xf.pivot = xf.pivot.WithX(-position);
         xf.gameObject.SetActive(true);
+        xf.GetComponent<Image>().sprite = _points[position];
 
         var toggle = xf.GetComponentInChildren<Toggle>();
         if (toggle) trigger.onTrigger.AddListener(() => toggle.isOn = true);
