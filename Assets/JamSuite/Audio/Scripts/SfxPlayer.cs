@@ -28,13 +28,17 @@ namespace JamSuite.Audio {
         }
 
         public void Play(string clipName, float volumeScale) {
+            Play(clipName, volumeScale, throttle);
+        }
+
+        public void Play(string clipName, float volumeScale, float throttleOverride) {
             var clip = list.LookupClip(clipName);
             if (!clip) return;
 
             var lastPlay = 0f;
             var everPlayed = lastPlays.TryGetValue(clip, out lastPlay);
 
-            if (lastPlay + throttle > Time.timeSinceLevelLoad) return;
+            if (lastPlay + throttleOverride > Time.timeSinceLevelLoad) return;
 
             if (everPlayed) lastPlays[clip] = Time.timeSinceLevelLoad;
             else lastPlays.Add(clip, Time.timeSinceLevelLoad);

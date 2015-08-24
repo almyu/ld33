@@ -9,6 +9,11 @@ namespace JamSuite.Audio {
             if (player) player.Play(clipName, volumeScale);
         }
 
+        public static void Play(string clipName, float volumeScale, float throttleOverride) {
+            var player = SfxPlayer.instance;
+            if (player) player.Play(clipName, volumeScale, throttleOverride);
+        }
+
 
         public enum Mode {
             OnAwake,
