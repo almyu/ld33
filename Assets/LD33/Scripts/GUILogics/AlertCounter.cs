@@ -64,11 +64,7 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
         DoorTester();
         FlashlightTester();
     }
-
-    public void FlashLightSpottedPlayer() {
-        _slider.value = Balance.instance.AlarmLevelFlashight + (Time.deltaTime * Balance.instance.AlarmDecreasingFactor);
-    }
-
+    
     private void AlarmTester() {
         if (Input.GetKeyDown(key: KeyCode.KeypadPlus)) {
             Add(30);

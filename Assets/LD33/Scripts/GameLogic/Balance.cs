@@ -11,4 +11,5 @@ public class Balance : MonoSingleton<Balance> {
     public float TimeBetweenAlarms;
     public float WaitBeforeOpenDoor = 3f;
     public float WaitBeforeTurnOnFlashlight;
+    public float SarumanFollowSpottedPlayerTime = 5.0f;
 }
