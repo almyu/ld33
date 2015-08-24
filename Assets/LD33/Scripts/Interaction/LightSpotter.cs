@@ -25,7 +25,7 @@ public class LightSpotter : MonoBehaviour {
     }
 
     private void Update() {
-        var direction = _player.bounds.center - transform.position;
+        var direction = _player.transform.position - transform.position;
         var angle = Vector3.Angle(direction, transform.forward);
         if (angle < _fieldOfViewAngle * 0.5f) {
             RaycastHit hit;
