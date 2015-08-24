@@ -25,7 +25,9 @@ public class GameOverController : MonoSingleton<GameOverController> {
         var text = string.Empty;
         text += win ? "You win!" : "You've lost!";
         text += "\n";
+        text += "\n";
         text += TimeCounter.instance.GetElapsedTime();
+        text += "\n";
         text += "\n";
         text += "Score: " + ScoreCounter.instance.GetFinalScore();
 
