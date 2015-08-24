@@ -2,6 +2,10 @@
 using UnityEngine.Events;
 
 public class LightSpotter : MonoBehaviour {
+
+    [Range(0, 1)]
+    public float rangeFactor = 1f;
+
     public UnityEvent OnPlayerSpotted;
     public UnityEvent OnPlayerLost;
 
@@ -26,7 +30,7 @@ public class LightSpotter : MonoBehaviour {
         if (angle < _fieldOfViewAngle * 0.5f) {
             RaycastHit hit;
             //Debug.DrawRay(transform.position, direction.normalized, Color.red, 10.0f);
-            if (Physics.Raycast(transform.position, direction.normalized, out hit, _light.range)) {
+            if (Physics.Raycast(transform.position, direction.normalized, out hit, _light.range * rangeFactor)) {
                 if (hit.collider.gameObject.tag == "Player") {
                     if (!iSeePlayer) {
                         iSeePlayer = true;
