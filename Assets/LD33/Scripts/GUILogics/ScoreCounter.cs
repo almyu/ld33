@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreCounter : MonoSingleton<ScoreCounter> {
+
+    public int booScore = 200;
+
     private int _currentScore;
     private Text _scoreControl;
     private int _booCounter = 0;
@@ -44,6 +47,8 @@ public class ScoreCounter : MonoSingleton<ScoreCounter> {
     }
 
     public void BooPointFound() {
+        Add(booScore);
+
         _booCounter += 1;
         if (_booCounter == TriggerBar.instance.triggers.Length) {
             GameOverController.instance.ShowGameOver(win: true);
