@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ScoreCounter : MonoSingleton<ScoreCounter> {
 
     public int booScore = 200;
+    public string scoreFormat = "{0:0000000}";
 
     private int _currentScore;
     private Text _scoreControl;
@@ -23,7 +24,7 @@ public class ScoreCounter : MonoSingleton<ScoreCounter> {
             return;
 
         _currentScore += valueToAdd;
-        _scoreControl.text = String.Format("{0:0000000}", _currentScore);
+        _scoreControl.text = String.Format(scoreFormat, _currentScore);
     }
 
     public int GetScore() {
