@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     public float groundThreshold = 0.1f;
     public Vector2 mouseSens = new Vector2(2, -1);
     public Vector2 stickSens = new Vector2(4, -2);
+    public Vector2 pitchRange = new Vector2(-60f, 90f);
 
     private bool grounded;
     private float airTime, nextJumpTimer;
@@ -80,11 +81,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void HandleTurning() {
-        var yaw = Input.GetAxis("Mouse X") * mouseSens.x + Input.GetAxis("RightHorizontal") * stickSens.x;
-        var pitch = Input.GetAxis("Mouse Y") * mouseSens.y + Input.GetAxis("RightVertical") * stickSens.y;
+        var deltaTurn = Input.GetAxis("Mouse X") * mouseSens.x + Input.GetAxis("RightHorizontal") * stickSens.x * Time.deltaTime;
+        var deltaPitch = Input.GetAxis("Mouse Y") * mouseSens.y + Input.GetAxis("RightVertical") * stickSens.y * Time.deltaTime;
 
-        turner.Rotate(Vector3.up, yaw);
-        pitcher.Rotate(Vector3.right, pitch, Space.Self);
+        turner.Rotate(Vector3.up, deltaTurn);
+
+        var pitcherEuler = pitcher.localEulerAngles;
+        var signedPitch = pitcherEuler.x <= 180f ? pitcherEuler.x : pitcherEuler.x - 360f;
+        pitcherEuler.x = Mathf.Clamp(signedPitch + deltaPitch, pitchRange[0], pitchRange[1]);
+        pitcher.localEulerAngles = pitcherEuler;
     }
 
     private void UpdateAnimator() {
