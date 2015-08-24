@@ -12,16 +12,18 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
     private bool _gameOver = false;
     private float _timeSinceLevelLoad = 2.0f;
     private float _elapsed = 0.0f;
+    private float _doorOpenerTimer;
     // Use this for initialization
     private void Awake () {
         _slider = GetComponent<Slider>();
         _timeElapsedBetweenAlarmFires = Balance.instance.TimeBetweenAlarms;
+        _doorOpenerTimer = Balance.instance.DoorOpenerTimer;
     }
     
     public void Add(float valueToAdd) {
         if (_elapsed < _timeSinceLevelLoad)
             return;
-
+        
         valueToAdd *= alertCurve.Evaluate(_slider.normalizedValue);
 
         var newValue = _slider.value + valueToAdd;
@@ -43,11 +45,6 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
             _timeElapsedBetweenAlarmFires = 0.0f;
         }
 
-        if (newValue >= Balance.instance.AlarmLevelDoorLight) {
-            DoorController.instance.enabled = true;
-            _timeElapsedBetweenAlarmFires = 0.0f;
-        }
-
         alertFired.Invoke();
     }
 	
@@ -57,6 +54,12 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
             return;
 
         _elapsed += Time.deltaTime;
+
+        _doorOpenerTimer -= Time.deltaTime;
+        if (_doorOpenerTimer <= 0) {
+            DoorController.instance.enabled = true;
+            _doorOpenerTimer = Balance.instance.DoorOpenerTimer;
+        }
 
         _slider.value -= (Time.deltaTime * Balance.instance.AlarmDecreasingFactor);
 
