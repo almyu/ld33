@@ -13,19 +13,19 @@ public class LightSpotter : MonoBehaviour {
     public bool iSeePlayer;
 
     public Event playerSpotted;
-    private GameObject _player;
+    private Collider _player;
     private float _fieldOfViewAngle;
     private float _alertToAdd = 0.0f;
     private Light _light;
 
     private void Awake() {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>();
         _light = GetComponent<Light>();
         _fieldOfViewAngle = _light.spotAngle;
     }
 
     private void Update() {
-        var direction = _player.transform.position - transform.position;
+        var direction = _player.bounds.center - transform.position;
         var angle = Vector3.Angle(direction, transform.forward);
         if (angle < _fieldOfViewAngle * 0.5f) {
             RaycastHit hit;
