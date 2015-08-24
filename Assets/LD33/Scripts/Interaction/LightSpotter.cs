@@ -3,6 +3,8 @@ using UnityEngine.Events;
 
 public class LightSpotter : MonoBehaviour {
 
+    public static LightSpotter lastSeer;
+
     [Range(0, 1)]
     public float rangeFactor = 1f;
 
@@ -36,6 +38,8 @@ public class LightSpotter : MonoBehaviour {
                         iSeePlayer = true;
                         OnPlayerSpotted.Invoke();
                         AlarmController.instance.ISeeMonster();
+
+                        lastSeer = this;
                     }
 
                     AlertCounter.instance.Add(alertPerSecond * Time.deltaTime);
