@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8a2bf9f57effbfa42a1d2b98d8f048b6
-timeCreated: 1440439673
+guid: 532ae94f4bd30e14f9aaf642da5e956d
+timeCreated: 1440442988
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: WoodenCone
-    6400000: //RootNode
+    4300000: BoxCube
   materials:
     importMaterials: 1
     materialName: 0
@@ -36,7 +35,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
