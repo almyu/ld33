@@ -3,6 +3,8 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class AlertCounter : MonoSingleton<AlertCounter> {
+
+    public AnimationCurve alertCurve = AnimationCurve.Linear(0f, 1f, 1f, 1f);
     public UnityEvent alertFired;
 
     private Slider _slider;
@@ -15,6 +17,8 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
     }
     
     public void Add(float valueToAdd) {
+        valueToAdd *= alertCurve.Evaluate(_slider.normalizedValue);
+
         var newValue = _slider.value + valueToAdd;
         _slider.value = newValue;
 
@@ -34,19 +38,12 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
             _timeElapsedBetweenAlarmFires = 0.0f;
         }
 
-        if (newValue >= Balance.instance.AlarmLevelDoorLight && newValue < Balance.instance.AlarmLevelTopLight) {
+        if (newValue >= Balance.instance.AlarmLevelDoorLight) {
             DoorController.instance.enabled = true;
             _timeElapsedBetweenAlarmFires = 0.0f;
         }
-        
-        if (newValue >= Balance.instance.AlarmLevelTopLight) {
-            //TODO: Turn on the light
-            //_timeElapsedBetweenAlarmFires = 0.0f;
-        }
 
-        if (alertFired != null) {
-            alertFired.Invoke();
-        }
+        alertFired.Invoke();
     }
 	
 	// Update is called once per frame

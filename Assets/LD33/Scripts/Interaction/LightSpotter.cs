@@ -47,8 +47,4 @@ public class LightSpotter : MonoBehaviour {
             OnPlayerLost.Invoke();
         }
     }
-
-    private void OnEnable() {
-        alertPerSecond = 0.0f;
-    }
 }
