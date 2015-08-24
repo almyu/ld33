@@ -4,7 +4,7 @@ using UnityEngine;
 public class AlarmController : MonoSingleton<AlarmController> {
 
     public string sfx;
-
+    public float alarmSfxThrottle = 3.0f;
     private int _lightCounter = 0;
     private MeshRenderer _meshRenderer;
 
@@ -14,7 +14,7 @@ public class AlarmController : MonoSingleton<AlarmController> {
 
     private void ShowAlert(bool show) {
         if(show) {
-            Sfx.Play(sfx);
+            Sfx.Play(sfx, 0.7f, alarmSfxThrottle);
         }
         _meshRenderer.enabled = show;
     }
