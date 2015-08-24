@@ -16,7 +16,7 @@ public class NoisyObject : MonoBehaviour {
             return;
 
         foreach (var contact in collision.contacts) {
-            if ((contact.otherCollider.gameObject.layer & collisionLayers.value) == 0) continue;
+            if (((1 << contact.otherCollider.gameObject.layer) & collisionLayers.value) == 0) continue;
 
             Sfx.Play(sfx);
             AlertCounter.instance.Add(alert);
