@@ -15,7 +15,7 @@ public class Trigger : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    private void OnDrawGizmosSelected() {
+    private void OnDrawGizmos() {
         Gizmos.color = Color.red.WithA(0.3f);
         Gizmos.DrawSphere(transform.position, GetComponent<SphereCollider>().radius);
     }
