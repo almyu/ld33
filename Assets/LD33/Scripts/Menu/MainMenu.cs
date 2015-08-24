@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour {
     public Button decreaseButton;
     public Button increaseButton;
     public GameObject preloader;
+    public GameObject soundSlider;
+    public GameObject musicSlider;
 
     private int _qualityIndex;
     private Text _qualityButtonText;
