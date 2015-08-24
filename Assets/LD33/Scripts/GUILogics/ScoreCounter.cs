@@ -20,7 +20,7 @@ public class ScoreCounter : MonoSingleton<ScoreCounter> {
             return;
 
         _currentScore += valueToAdd;
-        _scoreControl.text = String.Format("Score: {0:0000000}", _currentScore);
+        _scoreControl.text = String.Format("{0:0000000}", _currentScore);
     }
 
     public int GetScore() {
