@@ -25,11 +25,11 @@ public class NoisyObject : MonoBehaviour {
     }
 
     private void OnCollisionStay(Collision collision) {
-        if (collision.relativeVelocity.sqrMagnitude < minCollisionSpeed * minCollisionSpeed)
+        if (collision.relativeVelocity.sqrMagnitude < minCollisionSpeed / 10)
             return;
 
         foreach (var contact in collision.contacts) {
-            if ((contact.otherCollider.gameObject.layer & collisionLayers.value) == 0) continue;
+            if (((1 << contact.otherCollider.gameObject.layer) & collisionLayers.value) == 0) continue;
 
             //Sfx.Play(sfx);
             AlertCounter.instance.Add(dragAlert * Time.fixedDeltaTime);
