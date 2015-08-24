@@ -6,6 +6,8 @@ public class ScoreCounter : MonoSingleton<ScoreCounter> {
     private int _currentScore;
     private Text _scoreControl;
     private int _booCounter = 0;
+    private float _timeSinceLevelLoad = 2.0f;
+    private float _elapsed = 0.0f;
 
     void Start() {
         _scoreControl = GetComponent<Text>();
@@ -13,6 +15,10 @@ public class ScoreCounter : MonoSingleton<ScoreCounter> {
     }
 
     public void Add(int valueToAdd) {
+        //because at start some objects fall and make noise
+        if (_elapsed < _timeSinceLevelLoad)
+            return;
+
         _currentScore += valueToAdd;
         _scoreControl.text = String.Format("Score: {0:0000000}", _currentScore);
     }
@@ -22,6 +28,7 @@ public class ScoreCounter : MonoSingleton<ScoreCounter> {
     }
 
     private void Update() {
+        _elapsed += Time.deltaTime;
         ScoreTester();
     }
 
