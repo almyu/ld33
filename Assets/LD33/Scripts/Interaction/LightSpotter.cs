@@ -35,6 +35,7 @@ public class LightSpotter : MonoBehaviour {
                     if (!iSeePlayer) {
                         iSeePlayer = true;
                         OnPlayerSpotted.Invoke();
+                        AlarmController.instance.ISeeMonster();
                     }
 
                     AlertCounter.instance.Add(alertPerSecond * Time.deltaTime);
@@ -45,6 +46,7 @@ public class LightSpotter : MonoBehaviour {
         if (iSeePlayer) {
             iSeePlayer = false;
             OnPlayerLost.Invoke();
+            AlarmController.instance.ILostMonster();
         }
     }
 }
