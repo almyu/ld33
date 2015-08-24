@@ -10,6 +10,8 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
     private Slider _slider;
     private float _timeElapsedBetweenAlarmFires;
     private bool _gameOver = false;
+    private float _timeSinceLevelLoad = 2.0f;
+    private float _elapsed = 0.0f;
     // Use this for initialization
     private void Awake () {
         _slider = GetComponent<Slider>();
@@ -17,6 +19,9 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
     }
     
     public void Add(float valueToAdd) {
+        if (_elapsed < _timeSinceLevelLoad)
+            return;
+
         valueToAdd *= alertCurve.Evaluate(_slider.normalizedValue);
 
         var newValue = _slider.value + valueToAdd;
@@ -50,6 +55,8 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
     private void Update () {
         if (_gameOver)
             return;
+
+        _elapsed += Time.deltaTime;
 
         _slider.value -= (Time.deltaTime * Balance.instance.AlarmDecreasingFactor);
 
