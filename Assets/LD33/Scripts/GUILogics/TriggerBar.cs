@@ -6,8 +6,10 @@ public class TriggerBar : MonoSingleton<TriggerBar> {
 
     public RectTransform template;
 
+    public Trigger[] triggers;
+
     private void Awake() {
-        var triggers = FindObjectsOfType<Trigger>();
+        triggers = FindObjectsOfType<Trigger>();
 
         for (int i = 0; i < triggers.Length; ++i)
             InstantiateToggle(triggers[i], i);
