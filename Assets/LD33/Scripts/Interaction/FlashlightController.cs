@@ -4,10 +4,10 @@ public class FlashlightController : MonoSingleton<FlashlightController> {
 
     public string sfx;
     public float patrolToNewTarget;
+    public float sauronSpeed = 0.5f;
 
     private GameObject[] _pointsForPatrol;
     private Light _flashlight;
-    private float strength = 0.5f;
     private float _elapsed = 0.0f;
     private const float SmoothTime = 0.2F;
     private GameObject _player;
@@ -53,7 +53,7 @@ public class FlashlightController : MonoSingleton<FlashlightController> {
     
     private void StartFollowPlayer() {
         var targetRotation = Quaternion.LookRotation(_player.transform.position - transform.position);
-        var str = Mathf.Min(strength * Time.deltaTime, 1);
+        var str = Mathf.Min(sauronSpeed * Time.deltaTime, 1);
         _flashlight.transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
     }
 
@@ -63,7 +63,7 @@ public class FlashlightController : MonoSingleton<FlashlightController> {
         }
 
         var targetRotation = Quaternion.LookRotation(_target - transform.position);
-        var str = Mathf.Min(strength * Time.deltaTime, 1);
+        var str = Mathf.Min(sauronSpeed * Time.deltaTime, 1);
         _flashlight.transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
     }
 
