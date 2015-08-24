@@ -6,10 +6,10 @@ namespace JamSuite.Audio {
     [RequireComponent(typeof(AudioSource))]
     public class SfxPlayer : MonoSingleton<SfxPlayer> {
 
+        public AudioSource source;
         public SfxList list;
         public float throttle = 0.1f;
 
-        private AudioSource source;
         private Dictionary<AudioClip, float> lastPlays = new Dictionary<AudioClip, float>();
 
 
