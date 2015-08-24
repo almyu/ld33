@@ -1,6 +1,4 @@
-﻿using JamSuite.Audio;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FlashlightController : MonoSingleton<FlashlightController> {
 
@@ -22,6 +20,7 @@ public class FlashlightController : MonoSingleton<FlashlightController> {
         _flashlight = GetComponent<Light>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _lightSpotter = GetComponent<LightSpotter>();
+        _lightSpotter.OnPlayerSpotted.AddListener(FollowPlayerIfSpotted);
         _pointsForPatrol = GameObject.FindGameObjectsWithTag("PointsForSauron");
         _target = GenerateNewTarget();
     }
@@ -70,5 +69,10 @@ public class FlashlightController : MonoSingleton<FlashlightController> {
 
     public void FollowPlayer(bool follow) {
         _followPlayer = follow;
+    }
+
+    public void FollowPlayerIfSpotted() {
+        _followPlayer = true;
+        AlertCounter.instance.FlashLightSpottedPlayer();
     }
 }
