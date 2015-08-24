@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using JamSuite.UI;
 
+[RequireComponent(typeof(SphereCollider))]
 public class Trigger : MonoBehaviour {
 
     public string text = "Boo!";
@@ -12,5 +13,10 @@ public class Trigger : MonoBehaviour {
         onTrigger.Invoke();
         GameOverController.instance.BooPointFound();
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.red.WithA(0.3f);
+        Gizmos.DrawSphere(transform.position, GetComponent<SphereCollider>().radius);
     }
 }
