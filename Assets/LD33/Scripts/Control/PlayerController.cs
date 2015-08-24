@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour {
     public AnimationCurve jumpKickFalloff = AnimationCurve.Linear(0f, 1f, 1f, 0f);
     public LayerMask groundLayers = 1;
     public float groundThreshold = 0.1f;
-    public Vector2 mouseSens = Vector2.one;
+    public Vector2 mouseSens = new Vector2(2, -1);
+    public Vector2 stickSens = new Vector2(4, -2);
 
     private bool grounded;
     private float airTime, nextJumpTimer;
@@ -79,11 +80,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void HandleTurning() {
-        var yaw = Input.GetAxis("Mouse X") + Input.GetAxis("RightHorizontal");
-        var pitch = Input.GetAxis("Mouse Y") + Input.GetAxis("RightVertical");
+        var yaw = Input.GetAxis("Mouse X") * mouseSens.x + Input.GetAxis("RightHorizontal") * stickSens.x;
+        var pitch = Input.GetAxis("Mouse Y") * mouseSens.y + Input.GetAxis("RightVertical") * stickSens.y;
 
-        turner.Rotate(Vector3.up, yaw * mouseSens.x);
-        pitcher.Rotate(Vector3.right, pitch * mouseSens.y, Space.Self);
+        turner.Rotate(Vector3.up, yaw);
+        pitcher.Rotate(Vector3.right, pitch, Space.Self);
     }
 
     private void UpdateAnimator() {
