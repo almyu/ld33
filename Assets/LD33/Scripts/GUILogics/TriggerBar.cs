@@ -17,7 +17,9 @@ public class TriggerBar : MonoSingleton<TriggerBar> {
 
     private void InstantiateToggle(Trigger trigger, int position) {
         var xf = Instantiate(template);
-        xf.pivot = xf.pivot.WithX(position);
+        xf.SetParent(transform, false);
+        xf.pivot = xf.pivot.WithX(-position);
+        xf.gameObject.SetActive(true);
 
         var toggle = xf.GetComponentInChildren<Toggle>();
         if (toggle) trigger.onTrigger.AddListener(() => toggle.isOn = true);
