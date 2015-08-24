@@ -122,6 +122,9 @@ ModelImporter:
     4300000: robot
     4300002: polySurface3
     4300004: polySurface4
+    6400000: polySurface3 1
+    6400002: polySurface4 1
+    6400004: robot
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
@@ -284,10 +287,10 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: .100000001
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
