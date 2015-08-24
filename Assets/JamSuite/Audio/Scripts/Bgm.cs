@@ -16,13 +16,18 @@ namespace JamSuite.Audio {
 
 
         public string playlistName;
+        public bool playOnStart = true;
 
         private void OnEnable() {
-            PushPlaylist(playlistName);
+            if (!playOnStart) PushPlaylist(playlistName);
+        }
+
+        private void Start() {
+            if (playOnStart) PushPlaylist(playlistName);
         }
 
         private void OnDisable() {
-            PopPlaylist(playlistName);
+            if (!playOnStart) PopPlaylist(playlistName);
         }
     }
 }
