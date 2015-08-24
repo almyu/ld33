@@ -6,16 +6,16 @@ public class LightSpotter : MonoBehaviour {
     [Range(0, 1)]
     public float rangeFactor = 1f;
 
+    public float alertPerSecond = 40f;
+
     public UnityEvent OnPlayerSpotted;
     public UnityEvent OnPlayerLost;
 
     [HideInInspector]
     public bool iSeePlayer;
 
-    public Event playerSpotted;
     private Collider _player;
     private float _fieldOfViewAngle;
-    private float _alertToAdd = 0.0f;
     private Light _light;
 
     private void Awake() {
@@ -31,14 +31,13 @@ public class LightSpotter : MonoBehaviour {
             RaycastHit hit;
             //Debug.DrawRay(transform.position, direction.normalized, Color.red, 10.0f);
             if (Physics.Raycast(transform.position, direction.normalized, out hit, _light.range * rangeFactor)) {
-                if (hit.collider.gameObject.tag == "Player") {
+                if (hit.collider == _player) {
                     if (!iSeePlayer) {
                         iSeePlayer = true;
                         OnPlayerSpotted.Invoke();
                     }
 
-                    _alertToAdd += Time.deltaTime * Balance.instance.SpottedPlayerAlarmFactor;
-                    AlertCounter.instance.Add(_alertToAdd);
+                    AlertCounter.instance.Add(alertPerSecond * Time.deltaTime);
                     return;
                 }
             }
@@ -50,6 +49,6 @@ public class LightSpotter : MonoBehaviour {
     }
 
     private void OnEnable() {
-        _alertToAdd = 0.0f;
+        alertPerSecond = 0.0f;
     }
 }
