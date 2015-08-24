@@ -4,12 +4,10 @@ using UnityEngine.UI;
 public class GameOverController : MonoSingleton<GameOverController> {
     private GameObject _gameOverText;
     private GameObject _restartButton;
-    private Text _restartText;
     private bool _gameOver = false;
     private void Awake() {
         _gameOverText = GameObject.FindGameObjectWithTag("GameOverText");
         _restartButton = GameObject.FindGameObjectWithTag("RestartButton");
-        _restartText = _restartButton.GetComponentInChildren<Text>();
     }
 
     public void ShowGameOver(bool win) {
@@ -19,7 +17,7 @@ public class GameOverController : MonoSingleton<GameOverController> {
 
         _restartButton.GetComponent<Image>().enabled = true;
         _restartButton.GetComponent<Button>().enabled = true;
-        _restartText.enabled = true;
+        
         _restartButton.GetComponent<Button>().onClick.AddListener(Restart);
 
         var text = string.Empty;
