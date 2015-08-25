@@ -33,15 +33,8 @@ public class ScoreCounter : MonoSingleton<ScoreCounter> {
 
     private void Update() {
         _elapsed += Time.deltaTime;
-        ScoreTester();
     }
-
-    private void ScoreTester() {
-        if (Input.GetKeyDown(key: KeyCode.Keypad9)) {
-            Add(300);
-        }
-    }
-
+    
     public int GetFinalScore() {
         var factor = _booCounter != 0 ? _booCounter : 1;
         return factor * _currentScore;

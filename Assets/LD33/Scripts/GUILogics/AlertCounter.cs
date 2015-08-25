@@ -72,28 +72,5 @@ public class AlertCounter : MonoSingleton<AlertCounter> {
         }
 
         _timeElapsedBetweenAlarmFires += Time.deltaTime;
-
-        //TODO: Remove before release!!!
-        AlarmTester();
-        DoorTester();
-        FlashlightTester();
-    }
-    
-    private void AlarmTester() {
-        if (Input.GetKeyDown(key: KeyCode.KeypadPlus)) {
-            Add(30);
-        }
-    }
-
-    private void DoorTester() {
-        if (Input.GetKeyDown(key: KeyCode.KeypadDivide)) {
-            DoorController.instance.enabled = true;
-        }
-    }
-
-    private void FlashlightTester() {
-        if (Input.GetKeyDown(key: KeyCode.KeypadMultiply)) {
-            FlashlightController.instance.enabled = true;
-        }
     }
 }
