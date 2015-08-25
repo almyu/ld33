@@ -25,13 +25,13 @@ public class NoisyObject : MonoBehaviour {
     }
 
     private void OnCollisionStay(Collision collision) {
-        if (collision.relativeVelocity.sqrMagnitude < minCollisionSpeed / 10)
-            return;
+        if (Mathf.Approximately(dragAlert, 0f) && Mathf.Approximately(dragScore, 0f)) return;
+        if (collision.relativeVelocity.sqrMagnitude < minCollisionSpeed / 10) return;
 
         foreach (var contact in collision.contacts) {
             if (((1 << contact.otherCollider.gameObject.layer) & collisionLayers.value) == 0) continue;
 
-            //Sfx.Play(sfx);
+            Sfx.Play(sfx, 0.4f);
             AlertCounter.instance.Add(dragAlert * Time.fixedDeltaTime);
             ScoreCounter.instance.Add(Mathf.FloorToInt(dragScore * Time.fixedDeltaTime));
         }
