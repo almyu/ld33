@@ -8,17 +8,25 @@ public class VolumeControl : MonoBehaviour {
     public Slider musicVolumeSlider, effectsVolumeSlider;
 
     private void Start() {
-        if (PlayerPrefs.HasKey("MusicVolume")) mixer.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume"));
-        if (PlayerPrefs.HasKey("EffectsVolume")) mixer.SetFloat("EffectsVolume", PlayerPrefs.GetFloat("EffectsVolume"));
-
-        musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
-        effectsVolumeSlider.onValueChanged.AddListener(SetEffectsVolume);
-
         var musicVolume = 0f;
         var effectsVolume = 0f;
 
-        mixer.GetFloat("MusicVolume", out musicVolume);
-        mixer.GetFloat("EffectsVolume", out effectsVolume);
+        if (PlayerPrefs.HasKey("MusicVolume")) {
+            musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+            mixer.SetFloat("MusicVolume", musicVolume);
+        }
+        else mixer.GetFloat("MusicVolume", out musicVolume);
+
+
+        if (PlayerPrefs.HasKey("EffectsVolume")) {
+            effectsVolume = PlayerPrefs.GetFloat("EffectsVolume");
+            mixer.SetFloat("EffectsVolume", effectsVolume);
+        }
+        else mixer.GetFloat("EffectsVolume", out effectsVolume);
+    
+
+        musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
+        effectsVolumeSlider.onValueChanged.AddListener(SetEffectsVolume);
 
         musicVolumeSlider.value = musicVolume;
         effectsVolumeSlider.value = effectsVolume;
