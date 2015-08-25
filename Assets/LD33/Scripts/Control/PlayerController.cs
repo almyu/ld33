@@ -34,12 +34,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+        LockCursor();
         CheckGround();
         HandleTurning();
         HandleMovement();
         HandleJumping();
         UpdateAnimator();
         UpdateModel();
+    }
+
+    private void LockCursor() {
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void HandleMovement() {
