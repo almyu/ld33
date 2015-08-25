@@ -14,6 +14,7 @@ public class GameOverController : MonoSingleton<GameOverController> {
         if (_gameOver)
             return;
         _gameOver = true;
+        PauseGameController.instance.enabled = true;
 
         _restartButton.GetComponent<Image>().enabled = true;
         _restartButton.GetComponent<Button>().enabled = true;
